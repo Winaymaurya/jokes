@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: rgba(199, 248, 121, 0.701);
+        padding: 0px;
+        margin: 0px;
+    }
+    .he{
+        color: black;
+        text-decoration: underline;
+        letter-spacing: 2px;
+        
+    }
+    .cont{
+        height: 100vh;
+        width: auto;
+        display: flex;
+        margin: auto;
+        background-color:yellow;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .box{
+        height:auto;
+        width: 800px;
+        padding: 20px;
+        background-color: rgba(119, 232, 151, 0.769);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: aliceblue;
+        box-shadow: 2px 2px 20px rgb(78, 92, 58);
+        align-items: center;
+        border-radius: 6px;
+    }
+      .jokes{
+          margin: 20px;
+          font-size: 25px;
+          color: rgb(0, 0, 0);
+          text-align: center;
+          font-weight: 500;
+      }
+      .btn{
+          padding: 10px;
+          margin: 10px;
+          font-size: 17px;
+          font-family: 'Courier New', Courier, monospace;
+          font-weight: 600;
+          cursor: pointer;
+          border-radius: 20px;
+          border-style: none;
+          transform: 1s;
+        }
+
+      .btn:hover{
+          box-shadow: 1px 1px 20px rgb(0, 0, 0);
+          background-color: rgb(0, 0, 0);
+          color: white;
+      }
+</style>
+<body>
+    <div class="cont">
+    <div class="box">
+        <h1 class="he">
+            Welcome to myJokes
+        </h1>
+        <div class="jokes" id="child">
+            Jokes are loading....
+        </div>
+        <button title="I know jokes are lame" class="btn">
+           Next Joke
+        </button>
+    </div>
+</div>
+
+<script>
+     const jokes=document.getElementById('child')
+    const button=document.querySelector(".btn")
+
+const nextjoke =async ()=>{
+    try{
+    const setHeader={
+       headers:{
+            Accept:"application/json"
+    }
+    }
+     const res = await fetch("https://icanhazdadjoke.com",setHeader)
+     const data= await res.json()
+     jokes.innerHTML=data.joke;
+
+}catch(err){
+    console.log(`the error is${err}`);
+}
+}
+button.addEventListener('click',nextjoke);
+nextjoke();
+
+</script>
+</body>
+</html>
